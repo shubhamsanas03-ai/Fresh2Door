@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fresh2Door Checkout</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0fff5;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .checkout-header {
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .checkout-header h1 {
+            color: #168a45;
+            margin-bottom: 8px;
+        }
+
+        .checkout-header p {
+            color: #777;
+        }
+
+        .checkout-card {
+            background: white;
+            margin-top: 20px;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .checkout-card h2 {
+            margin-bottom: 18px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 14px;
+
+            border: 1px solid #ccc;
+            border-radius: 10px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #168a45;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+
+            background: #168a45;
+            color: white;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+
+            color: #168a45;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="checkout-container">
+
+        <div class="checkout-header">
+
+            <h1>🛒 Fresh2Door</h1>
+
+            <p>Complete your order</p>
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="checkout-card">
+
+            <h2>Order Summary</h2>
+
+            <div id="orderItems"></div>
+
+            <div class="total">
+
+                <span>Total</span>
+
+                <span>
+                    ₹<span id="orderTotal">0</span>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- DELIVERY DETAILS -->
+
+        <div class="checkout-card">
+
+            <h2>Delivery Details</h2>
+
+            <form onsubmit="placeOrder(event)">
+
+                <input
+                    type="text"
+                    id="customerName"
+                    class="input-box"
+                    placeholder="👤 Full Name"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    id="customerMobile"
+                    class="input-box"
+                    placeholder="📱 Mobile Number"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    required
+                >
+
+                <textarea
+                    id="address"
+                    class="input-box"
+                    rows="4"
+                    placeholder="🏠 Delivery Address"
+                    required
+                ></textarea>
+
+                <input
+                    type="text"
+                    id="city"
+                    class="input-box"
+                    placeholder="📍 City"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="pincode"
+                    class="input-box"
+                    placeholder="📮 Pincode"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
+                    required
+                >
+
+                <h2>Payment Method</h2>
+
+                <select
+                    id="payment"
+                    class="input-box"
+                    required
+                >
+
+                    <option value="">
+                        Select Payment Method
+                    </option>
+
+                    <option value="Cash on Delivery">
+                        Cash on Delivery
+                    </option>
+
+                    <option value="UPI">
+                        UPI
+                    </option>
+
+                    <option value="Card">
+                        Debit / Credit Card
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="submit"
+                    class="place-order">
+
+                    Place Order 🛒
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <a href="Index.html" class="home-link">
+            ← Continue Shopping
+        </a>
+
+    </div>
+
+
+    <script>
+
+        let cart =
+            JSON.parse(localStorage.getItem("fresh2doorCart")) || [];
+
+
+        function displayOrder() {
+
+            const container =
+                document.getElementById("orderItems");
+
+            const totalElement =
+                document.getElementById("orderTotal");
+
+            container.innerHTML = "";
+
+            let total = 0;
+
+
+            if (cart.length === 0) {
+
+                container.innerHTML =
+                    '<div class="empty-cart">Your cart is empty 🛒</div>';
+
+                totalElement.innerText = "0";
+
+                return;
+            }
+
+
+            cart.forEach(item => {
+
+                const itemTotal =
+                    item.price * item.quantity;
+
+                total += itemTotal;
+
+
+                const div =
+                    document.createElement("div");
+
+                div.className = "order-item";
+
+                div.innerHTML = `
+                    <span>
+                        ${item.emoji || "🛒"}
+                        ${item.name}
+                        × ${item.quantity}
+                    </span>
+
+                    <strong>
+                        ₹${itemTotal}
+                    </strong>
+                `;
+
+                container.appendChild(div);
+
+            });
+
+
+            totalElement.innerText = total;
+
+        }
+
+
+        function placeOrder(event) {
+
+            event.preventDefault();
+
+
+            if (cart.length === 0) {
+
+                alert("Your cart is empty.");
+
+                return;
+            }
+
+
+            const name =
+                document.getElementById("customerName").value;
+
+
+            alert(
+                "Thank you " +
+                name +
+                "! Your Fresh2Door order has been placed successfully 🎉"
+            );
+
+
+            localStorage.removeItem("fresh2doorCart");
+
+            window.location.href = "Index.html";
+
+        }
+
+
+        displayOrder();
+
+    </script>
+
+</body>
+
+</html>

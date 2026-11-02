@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fresh2Door Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #e8fff0,
+                #f8fff9
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+
+            background: white;
+
+            padding: 35px 25px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.12);
+
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 55px;
+            margin-bottom: 5px;
+        }
+
+        .brand {
+            color: #168a45;
+            font-size: 32px;
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .welcome {
+            color: #777;
+            margin-bottom: 28px;
+        }
+
+        .login-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #d5d5d5;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #168a45;
+        }
+
+        .login-button {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 5px;
+
+            background: #168a45;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+        .login-button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .register-text {
+            margin-top: 22px;
+
+            color: #555;
+        }
+
+        .register-text a {
+            color: #168a45;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .home-link {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: #168a45;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="login-card">
+
+        <div class="logo">
+            🛒
+        </div>
+
+        <div class="brand">
+            Fresh2Door
+        </div>
+
+        <p class="welcome">
+            Welcome back! Login to continue.
+        </p>
+
+
+        <h2 class="login-title">
+            Login
+        </h2>
+
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="loginEmail"
+                class="input-box"
+                placeholder="📧 Enter your email"
+                required
+            >
+
+
+            <input
+                type="password"
+                id="loginPassword"
+                class="input-box"
+                placeholder="🔒 Enter your password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-button">
+
+                Login 🛒
+
+            </button>
+
+            <p id="loginMessage" class="message"></p>
+
+        </form>
+
+
+        <p class="register-text">
+
+            Don't have an account?
+
+            <a href="Register.html">
+                Register
+            </a>
+
+        </p>
+
+
+        <a
+            href="Index.html"
+            class="home-link">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+
+    <!-- Main JavaScript -->
+    <script src="Script.js"></script>
+
+</body>
+
+</html>=

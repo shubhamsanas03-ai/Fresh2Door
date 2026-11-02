@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fresh2Door Register</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #e8fff0,
+                #f8fff9
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 400px;
+
+            background: white;
+
+            padding: 35px 25px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.12);
+
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 55px;
+            margin-bottom: 5px;
+        }
+
+        .brand {
+            color: #168a45;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .welcome {
+            color: #777;
+            margin-bottom: 28px;
+        }
+
+        .register-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+
+            border: 1px solid #d5d5d5;
+            border-radius: 10px;
+
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #168a45;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 5px;
+
+            background: #168a45;
+            color: white;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .login-text {
+            margin-top: 22px;
+            color: #555;
+        }
+
+        .login-text a {
+            color: #168a45;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+
+            color: #168a45;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="register-card">
+
+        <div class="logo">
+            🛒
+        </div>
+
+        <div class="brand">
+            Fresh2Door
+        </div>
+
+        <p class="welcome">
+            Create your account and start shopping.
+        </p>
+
+        <h2 class="register-title">
+            Create Account
+        </h2>
+
+
+        <form id="registerForm">
+
+            <input
+                type="text"
+                id="registerName"
+                class="input-box"
+                placeholder="👤 Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                class="input-box"
+                placeholder="📧 Email Address"
+                required
+            >
+
+            <input
+                type="tel"
+                id="registerMobile"
+                class="input-box"
+                placeholder="📱 Mobile Number"
+                required
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                class="input-box"
+                placeholder="🔒 Password"
+                required
+            >
+
+            <input
+                type="password"
+                id="confirmPassword"
+                class="input-box"
+                placeholder="🔒 Confirm Password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="register-button">
+
+                Create Account 🛒
+
+            </button>
+
+            <p id="registerMessage" class="message"></p>
+
+        </form>
+
+
+        <p class="login-text">
+
+            Already have an account?
+
+            <a href="Login.html">
+                Login
+            </a>
+
+        </p>
+
+
+        <a
+            href="Index.html"
+            class="home-link">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+
+    <!-- Main JavaScript -->
+    <script src="Script.js"></script>
+
+</body>
+
+</html>

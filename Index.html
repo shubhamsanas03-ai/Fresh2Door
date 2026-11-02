@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fresh2Door - Online Grocery</title>
+
+    <!-- Correct filename -->
+    <link rel="stylesheet" href="Style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            🛒 <span>Fresh2Door</span>
+        </div>
+
+
+        <div class="header-buttons" id="accountArea">
+
+            <!-- Login / User name will appear here -->
+
+            <a href="Login.html" class="login-btn">
+                👤 Login
+            </a>
+
+            <button
+                class="cart-btn"
+                onclick="openCart()">
+
+                🛍️ Cart
+                <span id="cartCount">0</span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <p class="small-title">
+                FRESH • FAST • AFFORDABLE
+            </p>
+
+
+            <h1>
+                Fresh Groceries<br>
+                Delivered to Your Door
+            </h1>
+
+
+            <p>
+                Buy fresh vegetables, fruits, dairy products
+                and daily essentials from Fresh2Door.
+            </p>
+
+
+            <button
+                onclick="scrollToProducts()"
+                class="shop-btn">
+
+                Shop Now 🛒
+
+            </button>
+
+        </div>
+
+
+        <div class="hero-image">
+            🥦🥕🍅
+        </div>
+
+    </section>
+
+
+
+    <!-- SEARCH -->
+
+    <section class="search-section">
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="🔍 Search groceries..."
+            onkeyup="searchProducts()"
+        >
+
+    </section>
+
+
+
+    <!-- CATEGORIES -->
+
+    <section class="categories">
+
+        <h2>
+            Shop by Category
+        </h2>
+
+
+        <div class="category-container">
+
+
+            <button
+                onclick="filterCategory('All')">
+
+                🛒<br>
+                All
+
+            </button>
+
+
+            <button
+                onclick="filterCategory('Vegetables')">
+
+                🥦<br>
+                Vegetables
+
+            </button>
+
+
+            <button
+                onclick="filterCategory('Fruits')">
+
+                🍎<br>
+                Fruits
+
+            </button>
+
+
+            <button
+                onclick="filterCategory('Dairy')">
+
+                🥛<br>
+                Dairy
+
+            </button>
+
+
+            <button
+                onclick="filterCategory('Essentials')">
+
+                🛍️<br>
+                Essentials
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- PRODUCTS -->
+
+    <section
+        class="products-section"
+        id="products">
+
+
+        <div class="section-heading">
+
+            <h2>
+                Popular Products
+            </h2>
+
+            <span id="productCount"></span>
+
+        </div>
+
+
+        <div
+            id="productsContainer"
+            class="products-container">
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- CART -->
+
+    <div
+        id="cartModal"
+        class="cart-modal">
+
+
+        <div class="cart-box">
+
+
+            <div class="cart-header">
+
+                <h2>
+                    Your Cart 🛒
+                </h2>
+
+
+                <button
+                    onclick="closeCart()">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+
+            <div id="cartItems"></div>
+
+
+            <div class="cart-total">
+
+                <strong>
+                    Total:
+                </strong>
+
+                ₹<span id="cartTotal">
+                    0
+                </span>
+
+            </div>
+
+
+            <!-- Login protected checkout -->
+
+            <button
+                class="checkout-btn"
+                onclick="goToCheckout()">
+
+                Proceed to Checkout
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            🛒 Fresh2Door
+        </h3>
+
+
+        <p>
+            Fresh groceries delivered right to your doorstep.
+        </p>
+
+
+        <p>
+            © 2026 Fresh2Door. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+
+    <!-- Main JavaScript -->
+
+    <script src="Script.js"></script>
+
+
+
+    <!-- Login Status -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const accountArea =
+                    document.getElementById(
+                        "accountArea"
+                    );
+
+
+                const loggedIn =
+                    localStorage.getItem(
+                        "fresh2doorLoggedIn"
+                    ) === "true";
+
+
+                const user =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "fresh2doorCurrentUser"
+                        )
+                    );
+
+
+                if (
+                    loggedIn &&
+                    user
+                ) {
+
+                    accountArea.innerHTML = `
+
+                        <span
+                            style="
+                                color:#168a45;
+                                font-weight:bold;
+                                margin-right:10px;
+                                font-size:16px;
+                            "
+                        >
+                            👤 ${user.name}
+                        </span>
+
+
+                        <button
+                            onclick="logoutUser()"
+                            style="
+                                background:#168a45;
+                                color:white;
+                                border:none;
+                                padding:10px 15px;
+                                border-radius:20px;
+                                font-weight:bold;
+                                cursor:pointer;
+                                margin-right:8px;
+                            "
+                        >
+                            Logout
+                        </button>
+
+
+                        <button
+                            class="cart-btn"
+                            onclick="openCart()"
+                        >
+                            🛍️ Cart
+                            <span id="cartCount">0</span>
+                        </button>
+
+                    `;
+
+                }
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>
