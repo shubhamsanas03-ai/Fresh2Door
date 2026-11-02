@@ -582,7 +582,7 @@ function loginUser(event) {
 
         setTimeout(function () {
 
-            window.location.href = "Index.html";
+            window.location.href = "index.html";
 
         }, 800);
 
